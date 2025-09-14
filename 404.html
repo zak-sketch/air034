@@ -108,4 +108,25 @@
       document.addEventListener('cut', function(e){ e.preventDefault(); });
       document.addEventListener('dragstart', function(e){ e.preventDefault(); });
 
-      function flashMsg(text){ try{ var
+      function flashMsg(text){ try{ var el=document.createElement('div'); el.textContent=text; Object.assign(el.style,{position:'fixed',bottom:'20px',left:'50%',transform:'translateX(-50%)',padding:'8px 14px',background:'rgba(0,0,0,0.7)',color:'#fff',borderRadius:'6px',zIndex:999999,fontSize:'13px'}); document.body.appendChild(el); setTimeout(function(){ el.remove(); },1200);}catch(err){}
+      }
+
+      document.addEventListener('keydown', function(e){
+        if(e.key==='F12' || e.keyCode===123){ e.preventDefault(); flashMsg('Action blocked'); return false; }
+        if(e.ctrlKey && e.shiftKey && (e.key==='I' || e.key==='J')){ e.preventDefault(); flashMsg('Action blocked'); return false; }
+        if(e.ctrlKey && (e.key==='u' || e.key==='U' || e.key==='s' || e.key==='S')){ e.preventDefault(); flashMsg('Action blocked'); return false; }
+        if((e.metaKey||e.ctrlKey) && (e.key==='u' || e.key==='U' || e.key==='s' || e.key==='S')){ e.preventDefault(); flashMsg('Action blocked'); return false; }
+      });
+
+      // DevTools heuristics
+      (function detectDevTools(){ var devtools=false; var threshold=160; function sizeCheck(){ try{ var wd=Math.abs(window.outerWidth-window.innerWidth); var hd=Math.abs(window.outerHeight-window.innerHeight); return (wd>threshold)||(hd>threshold);}catch(e){return false;} }
+        function timeCheck(){ var start=performance.now(); debugger; var end=performance.now(); return (end-start)>100; }
+        function run(){ try{ if(sizeCheck()||timeCheck()){ if(!devtools){ devtools=true; flashMsg('Developer tools detected'); } } else { devtools=false; } }catch(e){} }
+        setInterval(run,1500);
+      })();
+
+      try{ console.log('%cStop!', 'color: #b91c1c; font-size: 36px; font-weight: 700;'); console.log('%cIf you need access to resources, contact the site owner.', 'font-size:14px;'); }catch(e){}
+    })();
+  </script>
+</body>
+</html>
