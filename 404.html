@@ -1,605 +1,111 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Air034 Hotel & Club - Luxury Boeing Hotel Experience</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        navy: {
-                            50: '#f5f7fa',
-                            100: '#e4e8f0',
-                            200: '#ccd4e2',
-                            300: '#a4b3cb',
-                            400: '#758cb0',
-                            500: '#576d97',
-                            600: '#44567c',
-                            700: '#384765',
-                            800: '#303c54',
-                            900: '#0f172a',
-                        },
-                        gold: {
-                            50: '#fdf8e6',
-                            100: '#fbedc5',
-                            200: '#f8de91',
-                            300: '#f4c752',
-                            400: '#f0b027',
-                            500: '#ea9a15',
-                            600: '#cf7710',
-                            700: '#ac5611',
-                            800: '#8c4314',
-                            900: '#723714',
-                        },
-                        green: {
-                            50: '#f0fdf4',
-                            100: '#dcfce7',
-                            200: '#bbf7d0',
-                            300: '#86efac',
-                            400: '#4ade80',
-                            500: '#22c55e',
-                            600: '#16a34a',
-                            700: '#15803d',
-                            800: '#166534',
-                            900: '#14532d',
-                        },
-                        red: {
-                            50: '#fef2f2',
-                            100: '#fee2e2',
-                            200: '#fecaca',
-                            300: '#fca5a5',
-                            400: '#f87171',
-                            500: '#ef4444',
-                            600: '#dc2626',
-                            700: '#b91c1c',
-                            800: '#991b1b',
-                            900: '#7f1d1d',
-                        }
-                    },
-                    fontFamily: {
-                        heading: ['Playfair Display', 'serif'],
-                        body: ['Inter', 'sans-serif'],
-                    },
-                    animation: {
-                        'float': 'float 8s ease-in-out infinite',
-                        'float-reverse': 'float 10s ease-in-out infinite reverse',
-                        'float-delayed': 'float 12s ease-in-out 1s infinite',
-                        'left-right': 'leftRight 20s ease-in-out infinite',
-                        'right-left': 'rightLeft 18s ease-in-out infinite',
-                        'up-down': 'upDown 15s ease-in-out infinite',
-                    },
-                    keyframes: {
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0) rotate(0deg)' },
-                            '50%': { transform: 'translateY(-20px) rotate(5deg)' },
-                        },
-                        leftRight: {
-                            '0%, 100%': { transform: 'translateX(-10%)' },
-                            '50%': { transform: 'translateX(10%)' },
-                        },
-                        rightLeft: {
-                            '0%, 100%': { transform: 'translateX(10%)' },
-                            '50%': { transform: 'translateX(-10%)' },
-                        },
-                        upDown: {
-                            '0%, 100%': { transform: 'translateY(-5%)' },
-                            '50%': { transform: 'translateY(5%)' },
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        .fade-in {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 1s ease, transform 1s ease;
-        }
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .parallax {
-            background-attachment: fixed;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-        }
-        .menu-card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .menu-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-        }
-        .btn-primary {
-            background: linear-gradient(to right, #22c55e, #15803d);
-            transition: all 0.3s ease;
-        }
-        .btn-primary:hover {
-            background: linear-gradient(to right, #15803d, #14532d);
-            transform: translateY(-2px);
-        }
-        .btn-secondary {
-            background: linear-gradient(to right, #ef4444, #b91c1c);
-            transition: all 0.3s ease;
-        }
-        .btn-secondary:hover {
-            background: linear-gradient(to right, #b91c1c, #991b1b);
-            transform: translateY(-2px);
-        }
-        .floating-img {
-            animation: float 15s ease-in-out infinite;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-            border: 4px solid white;
-        }
-        @keyframes float {
-            0% {
-                transform: translate(0, 0) rotate(0deg);
-            }
-            25% {
-                transform: translate(10px, -15px) rotate(3deg);
-            }
-            50% {
-                transform: translate(-5px, -25px) rotate(-2deg);
-            }
-            75% {
-                transform: translate(15px, -10px) rotate(2deg);
-            }
-            100% {
-                transform: translate(0, 0) rotate(0deg);
-            }
-        }
-        .floating-img:nth-child(2) {
-            animation: float 18s ease-in-out 2s infinite;
-        }
-        .floating-img:nth-child(3) {
-            animation: float 20s ease-in-out 4s infinite;
-        }
-        .floating-img:nth-child(4) {
-            animation: float 16s ease-in-out 1s infinite;
-        }
-        .floating-img:nth-child(5) {
-            animation: float 22s ease-in-out 3s infinite;
-        }
-        .plane-animation {
-            animation: leftRight 25s ease-in-out infinite;
-        }
-        .sign-animation {
-            animation: rightLeft 20s ease-in-out infinite;
-        }
-        .entrance-animation {
-            animation: upDown 18s ease-in-out infinite;
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>404 — Page Not Found | Air 034 Hotel & Club</title>
+  <!-- Tailwind CDN for quick use (swap for your build pipeline in production) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Subtle background "matrix" / hacker vibe */
+    body { background: radial-gradient(ellipse at bottom, #0b1020 0%, #06070a 60%); }
+    .matrix {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-image: linear-gradient(0deg, rgba(0,0,0,0.02) 1px, transparent 1px);
+      background-size: 100% 24px;
+      mix-blend-mode: screen;
+      opacity: 0.65;
+    }
+    .glow-white { text-shadow: 0 2px 8px rgba(255,255,255,0.06), 0 6px 20px rgba(0,0,0,0.6); }
+    .big-err { letter-spacing: 0.02em; }
+
+    /* small animated code-lines on the left to add hacker feel */
+    .code-lines {
+      position: absolute; left: 2rem; top: 20%; width: 220px; opacity: 0.18;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", monospace;
+      color: #00ff9f; font-size: 12px; line-height: 1.4;
+      transform: translateY(0);
+      animation: float 6s linear infinite;
+    }
+    @keyframes float { 0% { transform: translateY(0);} 50% { transform: translateY(-18px);} 100% { transform: translateY(0);} }
+
+    /* responsive container centering */
+    .card { background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01)); border-radius: 18px; padding: 2.5rem; }
+  </style>
 </head>
-<body class="font-body bg-white text-navy-900 dark:bg-navy-900 dark:text-white">
-    <!-- Navigation -->
-    <nav class="fixed w-full bg-white/90 dark:bg-navy-900/90 backdrop-blur-sm z-50 shadow-md transition-all duration-300">
-        <div class="container mx-auto px-4">
-            <div class="flex justify-between items-center py-4">
-                <div class="flex items-center">
-                    <h1 class="text-2xl font-bold font-heading text-green-600 dark:text-green-400">Air034</h1>
-                    <span class="ml-2 text-sm text-red-500 dark:text-red-400">Hotel & Club</span>
-                </div>
-                
-                <div class="hidden md:flex space-x-8">
-                    <a href="#about" class="hover:text-green-600 dark:hover:text-green-400 transition-colors">About</a>
-                    <a href="#dining" class="hover:text-green-600 dark:hover:text-green-400 transition-colors">Dining</a>
-                    <a href="#drinks" class="hover:text-green-600 dark:hover:text-green-400 transition-colors">Drinks</a>
-                    <a href="#lounges" class="hover:text-green-600 dark:hover:text-green-400 transition-colors">Lounges</a>
-                    <a href="#leisure" class="hover:text-green-600 dark:hover:text-green-400 transition-colors">Leisure</a>
-                    <a href="#contact" class="hover:text-green-600 dark:hover:text-green-400 transition-colors">Contact</a>
-                </div>
-                
-                <div class="flex items-center space-x-4">
-                    <button id="theme-toggle" class="p-2 rounded-full bg-navy-100 dark:bg-navy-700 text-navy-700 dark:text-green-400">
-                        <i class="fas fa-moon"></i>
-                    </button>
-                    <a href="tel:0700000000" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-full transition-colors flex items-center">
-                        <i class="fas fa-phone mr-2"></i> Call Now
-                    </a>
-                    <button class="md:hidden">
-                        <i class="fas fa-bars text-xl"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </nav>
+<body class="min-h-screen flex items-center justify-center text-gray-200">
+  <div class="matrix"></div>
 
-    <!-- Hero Section with Animated Plane -->
-    <section class="h-screen flex items-center justify-center relative overflow-hidden">
-        <div class="absolute inset-0 bg-black/40 z-10"></div>
-        
-        <!-- Animated Plane Background -->
-        <div class="absolute inset-0 z-0 overflow-hidden">
-            <img src="planeair34.webp" class="absolute w-full h-full object-cover plane-animation" alt="Air034 Plane">
-        </div>
-        
-        <div class="container mx-auto px-4 text-center z-20 text-white">
-            <h1 class="text-5xl md:text-7xl font-bold font-heading mb-4">Air034 Hotel & Club</h1>
-            <p class="text-xl md:text-2xl mb-8 max-w-2xl mx-auto">Where Luxury Meets Adventure – Inside a Boeing Plane</p>
-            <button class="btn-primary text-white px-8 py-3 rounded-full text-lg font-semibold">
-                Book Your Experience
-            </button>
-        </div>
-        
-        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-20 animate-bounce">
-            <a href="#about" class="text-white text-4xl">
-                <i class="fas fa-chevron-down"></i>
-            </a>
-        </div>
-    </section>
+  <div class="absolute inset-0 overflow-hidden">
+    <div class="code-lines">/* system logs */
+-- connection: 0x3A
+-- handshake: failed
+-- resource: /page/notfound
+-- tip: contact admin
+</div>
+  </div>
 
-    <!-- About Section with Animated Images -->
-    <section id="about" class="py-20 bg-navy-50 dark:bg-navy-800">
-        <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold font-heading text-center mb-16 text-navy-900 dark:text-white">Our Unique Story</h2>
-            
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div class="space-y-6">
-                    <p class="text-lg">Welcome to Air034 Hotel & Club, a one-of-a-kind establishment nestled in the heart of Kitengela, Kajiado, Kenya. Our unique hotel is built inside a massive Boeing airplane, offering an experience unlike any other.</p>
-                    <p class="text-lg">What started as an ambitious vision has transformed into a premier destination for those seeking luxury, adventure, and unforgettable memories. From our famous Choma meat to our executive club experience, we've created a space where every detail matters.</p>
-                    <p class="text-lg">Located just outside Nairobi, Air034 provides the perfect escape from the city hustle while remaining easily accessible. Come experience the magic of aviation-inspired hospitality.</p>
-                </div>
-                
-                <div class="grid grid-cols-2 gap-4 relative">
-                    <div class="rounded-lg overflow-hidden shadow-lg entrance-animation">
-                        <img src="entranceair34.webp" alt="Air034 Entrance" class="w-full h-64 object-cover">
-                    </div>
-                    <div class="rounded-lg overflow-hidden shadow-lg mt-8 sign-animation">
-                        <img src="3dsign.webp" alt="3D Sign" class="w-full h-64 object-cover">
-                    </div>
-                    <div class="rounded-lg overflow-hidden shadow-lg">
-                        <img src="mainentrance34.webp" alt="Air034 Main Entrance" class="w-full h-64 object-cover">
-                    </div>
-                    <div class="rounded-lg overflow-hidden shadow-lg mt-8">
-                        <img src="viewroadsign.webp" alt="Road Sign" class="w-full h-64 object-cover">
-                    </div>
-                </div>
-            </div>
+  <main class="max-w-4xl w-full mx-6">
+    <div class="card shadow-2xl backdrop-blur-md">
+      <header class="flex items-start gap-6">
+        <div class="flex-shrink-0">
+          <!-- Simple SVG logo (plane) -->
+          <svg width="72" height="72" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="rounded-full p-2 bg-white/5">
+            <path d="M2 16c0 0 7-3 9-3s6-1 8-2 3-4 3-4l-2-1s-2 2-4 2-6 1-9 3S2 16 2 16z" fill="currentColor" opacity="0.06"></path>
+            <path d="M2 21l20-9L2 3v6l12 3-12 3v6z" fill="#fff" opacity="0.06"></path>
+          </svg>
         </div>
-    </section>
-
-    <!-- Choma & Dining Section -->
-    <section id="dining" class="py-20">
-        <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold font-heading text-center mb-16">Choma & Dining Experience</h2>
-            
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div class="grid grid-cols-2 gap-4">
-                    <div class="rounded-lg overflow-hidden shadow-lg">
-                        <img src="choma.webp" alt="Choma meat" class="w-full h-64 object-cover">
-                    </div>
-                    <div class="rounded-lg overflow-hidden shadow-lg mt-8">
-                        <img src="choma2.webp" alt="Choma grill" class="w-full h-64 object-cover">
-                    </div>
-                    <div class="rounded-lg overflow-hidden shadow-lg">
-                        <img src="meat.webp" alt="Meat" class="w-full h-64 object-cover">
-                    </div>
-                    <div class="rounded-lg overflow-hidden shadow-lg mt-8">
-                        <img src="chef.webp" alt="Chef" class="w-full h-64 object-cover">
-                    </div>
-                </div>
-                
-                <div class="space-y-6">
-                    <h3 class="text-2xl font-heading font-bold text-green-600">Famous Kitengela Choma</h3>
-                    <p class="text-lg">Our specialty is authentic Kenyan Choma - expertly grilled meat that's tender, flavorful, and cooked to perfection. Using traditional techniques and the finest ingredients, our chefs create a culinary experience that keeps guests coming back for more.</p>
-                    <p class="text-lg">From succulent nyama choma to grilled specialties featuring the best of Kenyan produce, our menu celebrates local flavors with a touch of elegance.</p>
-                    
-                    <div class="pt-6">
-                        <h4 class="text-xl font-semibold mb-4">Signature Dishes</h4>
-                        <ul class="space-y-2">
-                            <li class="flex items-center"><div class="w-2 h-2 bg-green-500 rounded-full mr-3"></div> Traditional Beef Choma</li>
-                            <li class="flex items-center"><div class="w-2 h-2 bg-green-500 rounded-full mr-3"></div> Grilled Goat Meat</li>
-                            <li class="flex items-center"><div class="w-2 h-2 bg-red-500 rounded-full mr-3"></div> Chicken BBQ Special</li>
-                            <li class="flex items-center"><div class="w-2 h-2 bg-green-500 rounded-full mr-3"></div> Vegetarian Grilled Platter</li>
-                        </ul>
-                    </div>
-                    
-                    <a href="tel:0700000000" class="btn-secondary inline-block text-white px-6 py-3 rounded-full text-lg font-semibold mt-6">
-                        <i class="fas fa-phone mr-2"></i> Call to Reserve a Table
-                    </a>
-                </div>
-            </div>
+        <div class="flex-1">
+          <h1 class="text-4xl md:text-5xl font-extrabold mb-1 big-err">
+            <span class="text-green-600">Air</span>
+            <span class="px-2 text-red-600">034</span>
+            <span class="text-white glow-white">Hotel &amp; Club</span>
+          </h1>
+          <p class="text-sm text-gray-300">We couldn't find the page you requested. It might have moved or never existed.</p>
         </div>
-    </section>
+      </header>
 
-    <!-- Drinks & Club Experience -->
-    <section id="drinks" class="py-20 bg-navy-900 text-white">
-        <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold font-heading text-center mb-16">Drinks & Club Experience</h2>
-            
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div class="space-y-6">
-                    <h3 class="text-2xl font-heading font-bold text-green-400">Exquisite Beverages</h3>
-                    <p class="text-lg">Our full-service bar offers an extensive selection of wines, cocktails, spirits, and local favorites. Whether you're looking for a classic drink or something with a unique twist, our skilled bartenders will craft the perfect beverage for you.</p>
-                    <p class="text-lg">The club atmosphere inside the Boeing fuselage creates an unforgettable setting for socializing, dancing, and making memories. With state-of-the-art sound and lighting, Air034 Club is the premier entertainment destination in Kitengela.</p>
-                    
-                    <div class="pt-6">
-                        <h4 class="text-xl font-semibold mb-4">Popular Choices</h4>
-                        <ul class="space-y-2">
-                            <li class="flex items-center"><div class="w-2 h-2 bg-green-500 rounded-full mr-3"></div> Signature Cocktails</li>
-                            <li class="flex items-center"><div class="w-2 h-2 bg-green-500 rounded-full mr-3"></div> Premium Kenyan Wines</li>
-                            <li class="flex items-center"><div class="w-2 h-2 bg-red-500 rounded-full mr-3"></div> Local Craft Beers</li>
-                            <li class="flex items-center"><div class="w-2 h-2 bg-green-500 rounded-full mr-3"></div> Executive Spirit Selection</li>
-                        </ul>
-                    </div>
-                    
-                    <a href="tel:0700000000" class="btn-primary inline-block text-white px-6 py-3 rounded-full text-lg font-semibold mt-6">
-                        <i class="fas fa-phone mr-2"></i> Call for Reservations
-                    </a>
-                </div>
-                
-                <div class="grid grid-cols-2 gap-4">
-                    <div class="rounded-lg overflow-hidden shadow-lg">
-                        <img src="clubmain.webp" alt="Club interior" class="w-full h-64 object-cover">
-                    </div>
-                    <div class="rounded-lg overflow-hidden shadow-lg mt-8">
-                        <img src="counter1.webp" alt="Bar counter" class="w-full h-64 object-cover">
-                    </div>
-                    <div class="rounded-lg overflow-hidden shadow-lg">
-                        <img src="winescounter.webp" alt="Wines counter" class="w-full h-64 object-cover">
-                    </div>
-                    <div class="rounded-lg overflow-hidden shadow-lg mt-8">
-                        <img src="executivecounter.webp" alt="Executive counter" class="w-full h-64 object-cover">
-                    </div>
-                </div>
-            </div>
+      <section class="mt-8 md:mt-12 flex flex-col md:flex-row items-center md:items-start gap-8">
+        <div class="flex-1">
+          <div class="text-6xl md:text-8xl font-black">404</div>
+          <p class="mt-3 text-gray-300 max-w-xl">Sorry — the resource you're looking for can't be found. Try returning to the home page or reach out to us and we'll help you locate it.</p>
+
+          <div class="mt-6 flex flex-wrap gap-3">
+            <a href="/" class="inline-block px-5 py-3 rounded-lg bg-green-600 hover:bg-green-500 transition font-semibold">Return Home</a>
+            <a href="/contact" class="inline-block px-5 py-3 rounded-lg border border-white/10 hover:bg-white/5 transition">Contact Us</a>
+            <a href="/sitemap.xml" class="inline-block px-5 py-3 rounded-lg border border-white/10 hover:bg-white/5 transition">Sitemap</a>
+          </div>
+
+          <div class="mt-6 text-xs text-gray-400">If you think this is an error, email: <a href="mailto:info@robotechdigi.com" class="underline">info@robotechdigi.com</a> or call +254 700 000000</div>
         </div>
-    </section>
 
-    <!-- Executive Lounges -->
-    <section id="lounges" class="py-20">
-        <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold font-heading text-center mb-16">Executive Lounges & Sitting Areas</h2>
-            
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div class="grid grid-cols-2 gap-4">
-                    <div class="rounded-lg overflow-hidden shadow-lg">
-                        <img src="executivesitting.webp" alt="Executive sitting area" class="w-full h-64 object-cover">
-                    </div>
-                    <div class="rounded-lg overflow-hidden shadow-lg mt-8">
-                        <img src="sittingarea.webp" alt="Sitting area" class="w-full h-64 object-cover">
-                    </div>
-                    <div class="rounded-lg overflow-hidden shadow-lg">
-                        <img src="insideair034.webp" alt="Inside Air034" class="w-full h-64 object-cover">
-                    </div>
-                    <div class="rounded-lg overflow-hidden shadow-lg mt-8">
-                        <img src="insideair34.webp" alt="Inside Air34" class="w-full h-64 object-cover">
-                    </div>
-                </div>
-                
-                <div class="space-y-6">
-                    <h3 class="text-2xl font-heading font-bold text-green-600">Aviation-Inspired Luxury</h3>
-                    <p class="text-lg">Step inside the transformed Boeing aircraft and discover beautifully designed lounges and sitting areas that maintain the aviation theme while providing ultimate comfort.</p>
-                    <p class="text-lg">Our VIP lounges offer exclusive service and privacy for those special occasions or business meetings. The unique atmosphere of being inside an actual plane creates a conversation-starting environment that delights all our guests.</p>
-                    
-                    <div class="pt-6">
-                        <h4 class="text-xl font-semibold mb-4">Lounge Features</h4>
-                        <ul class="space-y-2">
-                            <li class="flex items-center"><div class="w-2 h-2 bg-green-500 rounded-full mr-3"></div> Premium VIP Sections</li>
-                            <li class="flex items-center"><div class="w-2 h-2 bg-green-500 rounded-full mr-3"></div> Aviation-Themed Decor</li>
-                            <li class="flex items-center"><div class="w-2 h-2 bg-red-500 rounded-full mr-3"></div> Comfortable Seating Areas</li>
-                            <li class="flex items-center"><div class="w-2 h-2 bg-green-500 rounded-full mr-3"></div> Exclusive Service</li>
-                        </ul>
-                    </div>
-                    
-                    <a href="tel:0700000000" class="btn-secondary inline-block text-white px-6 py-3 rounded-full text-lg font-semibold mt-6">
-                        <i class="fas fa-phone mr-2"></i> Call for VIP Booking
-                    </a>
-                </div>
-            </div>
+        <div class="w-full md:w-80 text-right">
+          <!-- Decorative card with a small hacker terminal look -->
+          <div class="rounded-lg p-6 bg-black/30 border border-white/5">
+            <div class="text-xs font-mono text-green-400">$ curl https://www.wakefieldsigns.co.ke/unknown</div>
+            <div class="mt-4 text-sm text-gray-200">Resource not found.</div>
+            <div class="mt-3 text-xs text-gray-400">Try checking your link or go back to the home page.</div>
+          </div>
         </div>
-    </section>
+      </section>
 
-    <!-- Leisure & Pool -->
-    <section id="leisure" class="py-20 bg-navy-50 dark:bg-navy-800">
-        <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold font-heading text-center mb-16">Leisure & Entertainment</h2>
-            
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div class="space-y-6">
-                    <h3 class="text-2xl font-heading font-bold text-green-600">Recreation & Relaxation</h3>
-                    <p class="text-lg">Beyond dining and drinks, Air034 offers various leisure activities to enhance your experience. Enjoy our pool tables, games, and entertainment options designed for fun and socializing.</p>
-                    <p class="text-lg">Our outdoor area features comfortable seating where you can relax with friends while enjoying the beautiful Kitengela weather. The unique combination of aviation theme and recreational facilities makes Air034 a destination like no other.</p>
-                    
-                    <div class="pt-6">
-                        <h4 class="text-xl font-semibold mb-4">Entertainment Options</h4>
-                        <ul class="space-y-2">
-                            <li class="flex items-center"><div class="w-2 h-2 bg-green-500 rounded-full mr-3"></div> Professional Pool Tables</li>
-                            <li class="flex items-center"><div class="w-2 h-2 bg-green-500 rounded-full mr-3"></div> Live Music Events</li>
-                            <li class="flex items-center"><div class="w-2 h-2 bg-red-500 rounded-full mr-3"></div> Themed Nights</li>
-                            <li class="flex items-center"><div class="w-2 h-2 bg-green-500 rounded-full mr-3"></div> Outdoor Relaxation Areas</li>
-                        </ul>
-                    </div>
-                    
-                    <a href="tel:0700000000" class="btn-primary inline-block text-white px-6 py-3 rounded-full text-lg font-semibold mt-6">
-                        <i class="fas fa-phone mr-2"></i> Call for Event Info
-                    </a>
-                </div>
-                
-                <div class="grid grid-cols-2 gap-4">
-                    <div class="rounded-lg overflow-hidden shadow-lg">
-                        <img src="pool.webp" alt="Pool table" class="w-full h-64 object-cover">
-                    </div>
-                    <div class="rounded-lg overflow-hidden shadow-lg mt-8">
-                        <img src="pool2.webp" alt="Pool area" class="w-full h-64 object-cover">
-                    </div>
-                    <div class="rounded-lg overflow-hidden shadow-lg">
-                        <img src="team.webp" alt="Team" class="w-full h-64 object-cover">
-                    </div>
-                    <div class="rounded-lg overflow-hidden shadow-lg mt-8">
-                        <div class="w-full h-64 bg-green-600 flex items-center justify-center text-white text-center p-4">
-                            <div>
-                                <i class="fas fa-users text-4xl mb-4"></i>
-                                <h3 class="font-heading font-bold text-xl">Friendly Staff</h3>
-                                <p>Ready to serve you</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+      <footer class="mt-10 border-t border-white/5 pt-6 text-xs text-gray-400 flex items-center justify-between">
+        <div>© <strong>Air 034 Hotel & Club</strong> — powered by <a href="https://www.robotechdigi.com" class="underline">Robotech Digi</a></div>
+        <div>Kitengela, Kajiado</div>
+      </footer>
+    </div>
+  </main>
 
-    <!-- Contact Section -->
-    <section id="contact" class="py-20 bg-navy-900 text-white">
-        <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold font-heading text-center mb-16">Visit Air034</h2>
-            
-            <div class="grid md:grid-cols-2 gap-12">
-                <div>
-                    <h3 class="text-2xl font-heading font-bold text-green-400 mb-6">Location & Hours</h3>
-                    
-                    <div class="space-y-4 mb-8">
-                        <div class="flex items-start">
-                            <div class="text-green-400 mr-4 mt-1"><i class="fas fa-map-marker-alt"></i></div>
-                            <div>
-                                <p class="font-semibold">Kitengela Town, Kajiado, Kenya</p>
-                                <p>Located along Nairobi-Namanga Road</p>
-                            </div>
-                        </div>
-                        
-                        <div class="flex items-start">
-                            <div class="text-green-400 mr-4 mt-1"><i class="fas fa-clock"></i></div>
-                            <div>
-                                <p class="font-semibold">Opening Hours</p>
-                                <p>Monday - Sunday: 10:00 AM - 11:00 PM</p>
-                                <p>Club: Thursday - Saturday: 6:00 PM - 2:00 AM</p>
-                            </div>
-                        </div>
-                        
-                        <div class="flex items-start">
-                            <div class="text-green-400 mr-4 mt-1"><i class="fas fa-phone"></i></div>
-                            <div>
-                                <p class="font-semibold">Contact</p>
-                                <p>0700 000000</p>
-                                <p>info@air034.com</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="bg-green-700 p-6 rounded-lg">
-                        <h4 class="text-xl font-semibold mb-4">Make a Reservation</h4>
-                        <p class="mb-4">Book your table or experience in advance to guarantee availability.</p>
-                        <a href="tel:0700000000" class="btn-secondary inline-block text-white px-6 py-2 rounded-full transition-colors">
-                            <i class="fas fa-phone mr-2"></i> Call to Book
-                        </a>
-                    </div>
-                </div>
-                
-                <div>
-                    <div class="bg-gray-300 h-96 rounded-lg overflow-hidden">
-                        <!-- Map placeholder - would be replaced with actual map in production -->
-                        <div class="w-full h-full flex items-center justify-center bg-navy-800">
-                            <div class="text-center">
-                                <i class="fas fa-map-marked-alt text-5xl text-green-400 mb-4"></i>
-                                <p>Interactive Map</p>
-                                <p class="text-sm">Kitengela, Kajiado, Kenya</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+  <!-- Combined deterrent script (non-blocking, polite) -->
+  <script>
+    (function(){
+      // Basic UI locks
+      document.addEventListener('contextmenu', function(e){ e.preventDefault(); });
+      document.addEventListener('selectstart', function(e){ e.preventDefault(); });
+      document.addEventListener('copy', function(e){ e.preventDefault(); });
+      document.addEventListener('cut', function(e){ e.preventDefault(); });
+      document.addEventListener('dragstart', function(e){ e.preventDefault(); });
 
-    <!-- Footer -->
-    <footer class="bg-navy-800 text-white py-12">
-        <div class="container mx-auto px-4">
-            <div class="grid md:grid-cols-4 gap-8">
-                <div>
-                    <h3 class="text-xl font-heading font-bold mb-4 text-green-400">Air034</h3>
-                    <p class="mb-4">Where Luxury Meets Adventure – Inside a Boeing Plane</p>
-                    <div class="flex space-x-4">
-                        <a href="#" class="text-green-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="text-green-400 hover:text-white"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="text-green-400 hover:text-white"><i class="fab fa-twitter"></i></a>
-                    </div>
-                </div>
-                
-                <div>
-                    <h4 class="font-semibold mb-4">Quick Links</h4>
-                    <ul class="space-y-2">
-                        <li><a href="#about" class="hover:text-green-400">About Us</a></li>
-                        <li><a href="#dining" class="hover:text-green-400">Dining</a></li>
-                        <li><a href="#drinks" class="hover:text-green-400">Drinks</a></li>
-                        <li><a href="#contact" class="hover:text-green-400">Contact</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h4 class="font-semibold mb-4">Contact Info</h4>
-                    <ul class="space-y-2">
-                        <li>Kitengela, Kajiado, Kenya</li>
-                        <li><a href="tel:0700000000" class="hover:text-green-400">0700 000000</a></li>
-                        <li>info@air034.com</li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h4 class="font-semibold mb-4">Newsletter</h4>
-                    <p class="mb-4">Subscribe for updates and special offers</p>
-                    <div class="flex">
-                        <input type="email" placeholder="Your email" class="px-4 py-2 rounded-l-lg text-navy-900 w-full">
-                        <button class="bg-green-600 hover:bg-green-700 px-4 py-2 rounded-r-lg">Subscribe</button>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="border-t border-navy-700 mt-12 pt-8 text-center">
-                <p>&copy; 2023 Air034 Hotel & Club. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // Theme toggle functionality
-        const themeToggle = document.getElementById('theme-toggle');
-        const themeIcon = themeToggle.querySelector('i');
-        
-        themeToggle.addEventListener('click', () => {
-            document.documentElement.classList.toggle('dark');
-            
-            if (document.documentElement.classList.contains('dark')) {
-                themeIcon.classList.remove('fa-moon');
-                themeIcon.classList.add('fa-sun');
-            } else {
-                themeIcon.classList.remove('fa-sun');
-                themeIcon.classList.add('fa-moon');
-            }
-        });
-        
-        // Scroll animations
-        document.addEventListener('DOMContentLoaded', function() {
-            const fadeElements = document.querySelectorAll('.fade-in');
-            
-            const fadeInOptions = {
-                threshold: 0.3,
-                rootMargin: "0px 0px -50px 0px"
-            };
-            
-            const fadeInObserver = new IntersectionObserver(function(entries, observer) {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, fadeInOptions);
-            
-            fadeElements.forEach(element => {
-                fadeInObserver.observe(element);
-            });
-        });
-    </script>
-</body>
-</html>
+      function flashMsg(text){ try{ var
