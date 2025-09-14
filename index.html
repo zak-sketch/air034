@@ -607,5 +607,140 @@
             });
         });
     </script>
+    <!-- Put this near the end of <body> -->
+<script>
+  (function () {
+    /* -------------------------
+       Basic UI & selection locks
+       -------------------------*/
+    // Disable right-click context menu
+    document.addEventListener("contextmenu", function(e) {
+      e.preventDefault();
+    });
+
+    // Disable text selection, copying, dragging
+    document.addEventListener("selectstart", function(e) { e.preventDefault(); });
+    document.addEventListener("copy", function(e) { e.preventDefault(); });
+    document.addEventListener("cut", function(e) { e.preventDefault(); });
+    document.addEventListener("dragstart", function(e) { e.preventDefault(); });
+
+    // Optional: show a toast / subtle message when an action is blocked (comment out if not wanted)
+    function flashMsg(text) {
+      try {
+        var el = document.createElement('div');
+        el.textContent = text;
+        Object.assign(el.style, {
+          position: 'fixed',
+          bottom: '20px',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          padding: '8px 14px',
+          background: 'rgba(0,0,0,0.7)',
+          color: '#fff',
+          borderRadius: '6px',
+          zIndex: 999999,
+          fontSize: '13px',
+        });
+        document.body.appendChild(el);
+        setTimeout(function(){ el.remove(); }, 1200);
+      } catch (err) {}
+    }
+
+    /* -------------------------
+       Keyboard / DevTools blocking
+       -------------------------*/
+    document.addEventListener('keydown', function(e) {
+      // F12
+      if (e.key === 'F12' || e.keyCode === 123) {
+        e.preventDefault();
+        flashMsg('Action blocked');
+        return false;
+      }
+
+      // Ctrl+Shift+I / Ctrl+Shift+J (DevTools), Ctrl+U (view-source), Ctrl+S (save)
+      if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J')) {
+        e.preventDefault();
+        flashMsg('Action blocked');
+        return false;
+      }
+
+      if (e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.key === 's' || e.key === 'S')) {
+        e.preventDefault();
+        flashMsg('Action blocked');
+        return false;
+      }
+
+      // Mac: Cmd key variants
+      if ((e.metaKey || e.ctrlKey) && (e.key === 'u' || e.key === 'U' || e.key === 's' || e.key === 'S')) {
+        e.preventDefault();
+        flashMsg('Action blocked');
+        return false;
+      }
+    });
+
+    /* -------------------------------------------------------
+       Simple DevTools detector (heuristic) - not 100% reliable
+       Attempts to detect DevTools by timing the debugger statement
+       and by checking inner/outer window sizes.
+       -------------------------------------------------------*/
+    (function detectDevTools() {
+      var devtoolsOpen = false;
+      var threshold = 160; // px difference threshold heuristic
+
+      function sizeCheck() {
+        try {
+          var widthDiff = Math.abs(window.outerWidth - window.innerWidth);
+          var heightDiff = Math.abs(window.outerHeight - window.innerHeight);
+          return (widthDiff > threshold) || (heightDiff > threshold);
+        } catch (e) {
+          return false;
+        }
+      }
+
+      // Timing-based debugger trap (runs quickly when DevTools open)
+      function timeCheck() {
+        var start = performance.now();
+        // eslint-disable-next-line no-debugger
+        debugger;
+        var end = performance.now();
+        return (end - start) > 100;
+      }
+
+      function runChecks() {
+        try {
+          if (sizeCheck() || timeCheck()) {
+            if (!devtoolsOpen) {
+              devtoolsOpen = true;
+              flashMsg('Developer tools detected');
+            }
+            // optional: take an action like redirect or hide content (use with caution)
+            // window.location.href = '/';
+          } else {
+            devtoolsOpen = false;
+          }
+        } catch (e) { /* ignore */ }
+      }
+
+      // Check periodically
+      setInterval(runChecks, 1500);
+    })();
+
+    /* -------------------------
+       Defensive CSS (in case of light/dark backgrounds for white text)
+       -------------------------*/
+    // If you use white headings on any background, consider adding a subtle text shadow:
+    // .text-white { text-shadow: 0 1px 2px rgba(0,0,0,0.6); }
+    // Add that in your stylesheet rather than via JS.
+
+    /* -------------------------
+       Final note in console (polite deterrent)
+       -------------------------*/
+    try {
+      console.log('%cStop!', 'color: #b91c1c; font-size: 36px; font-weight: 700;');
+      console.log('%cThis area is for developers. If you need access to our code or assets, contact the site owner.', 'font-size:14px;');
+    } catch (e) {}
+  })();
+</script>
+
 </body>
 </html>
